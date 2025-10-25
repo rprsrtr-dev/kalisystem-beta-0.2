@@ -15,7 +15,7 @@ export function DispatchingTab({ store }: DispatchingTabProps) {
   const { orders, createOrder } = useOrders(store, 'dispatching');
 
   const handleAddCard = () => {
-    createOrder('sup1');
+    createOrder('KALI');
   };
 
   return (

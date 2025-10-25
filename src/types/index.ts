@@ -1,6 +1,17 @@
 export type Store = 'CV2' | 'STOCK02' | 'WB' | 'SHANTI';
 
-export type Supplier = 'sup1' | 'sup2' | 'sup3';
+export type Supplier =
+  | 'KALI'
+  | 'PISEY'
+  | 'MARKET'
+  | 'LEES'
+  | 'ANGKOR-COMPANY'
+  | 'COCA-COMPANY'
+  | 'CHARONAI'
+  | 'KOFI'
+  | 'TAKEAWAY-SHOP'
+  | 'STOCK'
+  | 'PZZA+';
 
 export type OrderStatus = 'dispatching' | 'on_the_way' | 'received' | 'completed';
 
@@ -61,7 +72,19 @@ export interface Order {
 
 export const STORES: Store[] = ['CV2', 'STOCK02', 'WB', 'SHANTI'];
 
-export const SUPPLIERS: Supplier[] = ['sup1', 'sup2', 'sup3'];
+export const SUPPLIERS: Supplier[] = [
+  'KALI',
+  'PISEY',
+  'MARKET',
+  'LEES',
+  'ANGKOR-COMPANY',
+  'COCA-COMPANY',
+  'CHARONAI',
+  'KOFI',
+  'TAKEAWAY-SHOP',
+  'STOCK',
+  'PZZA+',
+];
 
 export const UNITS: Unit[] = [
   'kg',

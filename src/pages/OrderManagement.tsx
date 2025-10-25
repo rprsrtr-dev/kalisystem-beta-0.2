@@ -10,9 +10,9 @@ export default function OrderManagement() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto p-4">
+      <div className="container mx-auto p-4 max-w-7xl">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold mb-2">Order Management</h1>
+          <h1 className="text-sm font-medium text-muted-foreground mb-4">Kalisystem</h1>
 
           <Tabs value={activeStore} onValueChange={(v) => setActiveStore(v as Store)}>
             <TabsList className="grid w-full grid-cols-4">

@@ -2,13 +2,14 @@ import { useState } from 'react';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Order, Store, OrderItem } from '@/types';
-import { Trash2, Plus, MessageSquare } from 'lucide-react';
+import { Trash2, Plus, MessageSquare, Share2 } from 'lucide-react';
 import { SupplierSelector } from './SupplierSelector';
 import { AddItemDialog } from './AddItemDialog';
 import { QuantitySelector } from './QuantitySelector';
 import { OrderMessageDialog } from './OrderMessageDialog';
 import { useOrders } from '@/hooks/useOrders';
 import { generateOrderMessage } from '@/lib/orderMessage';
+import { toast } from 'sonner';
 
 interface SupplierCardProps {
   order: Order;
@@ -80,6 +81,27 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
     return item.name;
   };
 
+  const handleShareMessage = async () => {
+    const message = order.order_message || generateOrderMessage(order);
+
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: `Order ${order.order_id}`,
+          text: message,
+        });
+        toast.success('Order shared');
+      } catch (error) {
+        if ((error as any).name !== 'AbortError') {
+          console.error('Error sharing:', error);
+        }
+      }
+    } else {
+      await navigator.clipboard.writeText(message);
+      toast.success('Order copied to clipboard');
+    }
+  };
+
   return (
     <Card>
       <CardHeader className="pb-3">
@@ -144,14 +166,24 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
         )}
 
         <div className="flex gap-2 flex-wrap pt-2 border-t">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => setShowOrderMessage(true)}
-          >
-            <MessageSquare className="w-4 h-4 mr-1" />
-            Message
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowOrderMessage(true)}
+            >
+              <MessageSquare className="w-4 h-4 mr-1" />
+              {order.order_id}
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="h-8 w-8"
+              onClick={handleShareMessage}
+            >
+              <Share2 className="w-4 h-4" />
+            </Button>
+          </div>
 
           <Button
             variant={order.is_paid ? 'default' : 'outline'}
@@ -166,7 +198,7 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
             size="sm"
             onClick={() => handleToggleStatus('is_sent')}
           >
-            {order.is_sent ? 'Sent' : 'Send'}
+            Send
           </Button>
 
           <Button
@@ -182,7 +214,7 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
             size="sm"
             onClick={() => handleToggleStatus('is_received')}
           >
-            {order.is_received ? 'Received' : 'Mark received'}
+            Received
           </Button>
         </div>
       </CardContent>
