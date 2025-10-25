@@ -10,7 +10,7 @@ export default function OrderManagement() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto p-4 max-w-7xl">
+      <div className="container mx-auto p-4 max-w-4xl">
         <div className="mb-6">
           <h1 className="text-sm font-medium text-muted-foreground mb-4">Kalisystem</h1>
 

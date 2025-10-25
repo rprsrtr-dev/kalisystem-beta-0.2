@@ -36,7 +36,7 @@ export function AddItemDialog({
     if (open) {
       fetchItems();
     }
-  }, [open]);
+  }, [open, supplier]);
 
   const fetchItems = async () => {
     const { data } = await supabase
@@ -46,9 +46,20 @@ export function AddItemDialog({
     setItems(data || []);
   };
 
-  const filteredItems = items.filter((item) =>
-    item.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const filteredItems = items.filter((item) => {
+    if (search) {
+      const matchesSearch = item.name.toLowerCase().includes(search.toLowerCase()) ||
+        (item.variant && item.variant.toLowerCase().includes(search.toLowerCase()));
+      return matchesSearch && item.supplier === supplier;
+    } else {
+      return item.supplier === supplier;
+    }
+  }).sort((a, b) => {
+    if (!search) {
+      return (b.order_count || 0) - (a.order_count || 0);
+    }
+    return 0;
+  }).slice(0, search ? undefined : 10);
 
   const handleSelectItem = (item: Item) => {
     onAdd({
@@ -174,15 +185,10 @@ export function AddItemDialog({
                   onClick={() => handleSelectItem(item)}
                   onContextMenu={(e) => handleRightClick(e, item)}
                 >
-                  <div className="flex flex-col items-start">
-                    <span>
-                      {item.name}
-                      {item.variant && ` (${item.variant})`}
-                    </span>
-                    {item.unit && (
-                      <span className="text-xs text-muted-foreground">{item.unit}</span>
-                    )}
-                  </div>
+                  <span>
+                    {item.name}
+                    {item.variant && ` (${item.variant})`}
+                  </span>
                 </Button>
               ))}
             </div>

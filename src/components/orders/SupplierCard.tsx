@@ -159,10 +159,16 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
         </div>
 
         {!isManagerView && (
-          <Button variant="outline" className="w-full" onClick={() => setShowAddItem(true)}>
-            <Plus className="w-4 h-4 mr-2" />
-            Add Item
-          </Button>
+          <div className="flex justify-center">
+            <Button
+              variant="outline"
+              size="icon"
+              className="rounded-full h-10 w-10"
+              onClick={() => setShowAddItem(true)}
+            >
+              <Plus className="w-5 h-5" />
+            </Button>
+          </div>
         )}
 
         <div className="flex gap-2 flex-wrap pt-2 border-t">
@@ -202,14 +208,6 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
           </Button>
 
           <Button
-            variant={order.is_on_the_way ? 'default' : 'outline'}
-            size="sm"
-            onClick={() => handleToggleStatus('is_on_the_way')}
-          >
-            {order.is_on_the_way ? 'On the way' : 'Mark on the way'}
-          </Button>
-
-          <Button
             variant={order.is_received ? 'default' : 'outline'}
             size="sm"
             onClick={() => handleToggleStatus('is_received')}
@@ -237,6 +235,7 @@ export function SupplierCard({ order, store, isManagerView = false }: SupplierCa
         open={showOrderMessage}
         onOpenChange={setShowOrderMessage}
         order={order}
+        onUpdate={updateOrder}
       />
     </Card>
   );

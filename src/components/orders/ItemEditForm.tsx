@@ -8,7 +8,6 @@ import {
 } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import {
   Select,
   SelectContent,
@@ -65,7 +64,6 @@ export function ItemEditForm({
 
         <div className="space-y-4">
           <div>
-            <Label htmlFor="name">Name</Label>
             <Input
               id="name"
               value={name}
@@ -75,7 +73,6 @@ export function ItemEditForm({
           </div>
 
           <div>
-            <Label htmlFor="variant">Variant</Label>
             <Input
               id="variant"
               value={variant}
@@ -85,7 +82,6 @@ export function ItemEditForm({
           </div>
 
           <div>
-            <Label htmlFor="unit">Unit</Label>
             <Select value={unit} onValueChange={(value) => setUnit(value as Unit)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select unit" />
@@ -101,7 +97,6 @@ export function ItemEditForm({
           </div>
 
           <div>
-            <Label htmlFor="supplier">Default Supplier</Label>
             <Select value={supplier} onValueChange={(value) => setSupplier(value as Supplier)}>
               <SelectTrigger>
                 <SelectValue placeholder="Select supplier" />

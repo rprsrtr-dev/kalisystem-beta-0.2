@@ -54,7 +54,11 @@ export function useOrders(store: Store, status: OrderStatus) {
 
   const createOrder = async (supplier: Supplier) => {
     try {
-      const orderId = Math.random().toString(36).substring(2, 8).toUpperCase();
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, '0');
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const orderId = `${supplier}_${store}_${day}${month}`;
+
       const { error } = await supabase.from('orders').insert({
         order_id: orderId,
         store,
