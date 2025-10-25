@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    --background: 240 10% 5%;
+    --foreground: 240 5% 96%;
+
+    --card: 240 8% 8%;
+    --card-foreground: 240 5% 96%;
+
+    --popover: 240 8% 10%;
+    --popover-foreground: 240 5% 96%;
+
+    --primary: 270 70% 60%;
+    --primary-foreground: 240 5% 96%;
+
+    --secondary: 190 70% 50%;
+    --secondary-foreground: 240 10% 5%;
+
+    --muted: 240 8% 15%;
+    --muted-foreground: 240 5% 60%;
+
+    --accent: 270 70% 60%;
+    --accent-foreground: 240 5% 96%;
+
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 240 5% 96%;
+
+    --border: 240 8% 18%;
+    --input: 240 8% 12%;
+    --ring: 270 70% 60%;
+
+    --radius: 1rem;
+
+    /* Custom design tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(270 70% 60%), hsl(190 70% 50%));
+    --gradient-card: linear-gradient(135deg, hsl(240 8% 10%), hsl(240 8% 8%));
+    --gradient-units: linear-gradient(135deg, hsl(240 70% 60%), hsl(270 70% 65%));
+    --gradient-store: linear-gradient(135deg, hsl(160 70% 50%), hsl(180 70% 55%));
+    --gradient-payment: linear-gradient(135deg, hsl(30 85% 60%), hsl(340 75% 65%));
+    --gradient-manager: linear-gradient(135deg, hsl(280 75% 60%), hsl(320 70% 65%));
+    --gradient-order: linear-gradient(135deg, hsl(190 75% 55%), hsl(220 70% 60%));
+    --glow-primary: 0 0 40px hsl(270 70% 60% / 0.3);
+    --glow-secondary: 0 0 30px hsl(190 70% 50% / 0.25);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
